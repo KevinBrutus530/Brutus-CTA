@@ -6,7 +6,7 @@ tweets.get("/", getAllTweets);
 
 tweets.get("/:id", getTweetByUser);
 
-tweets.get("/post/:id", getSingleTweet)
+tweets.get("/tweet/:id", getSingleTweet)
 
 tweets.post("/", createTweet);
 

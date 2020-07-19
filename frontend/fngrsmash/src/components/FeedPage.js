@@ -16,9 +16,7 @@ const FeedPage = () => {
 
     useEffect(() => {
         fetchData()
-        // debugger
     }, [])
-
     
     const loadTweets = tweets.map(tweet => {
         return <div>{tweet.tweet}</div>

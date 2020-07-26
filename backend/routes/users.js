@@ -2,10 +2,10 @@ const users = require('express').Router();
 
 const {
   createUser,
-  getSingleUserById
+  fetchAllUsers
 } = require("../queries/usersQueries")
 
-users.get("/:id", getSingleUserById)
 users.post("/", createUser)
+users.get("/", fetchAllUsers)
 
 module.exports = users;

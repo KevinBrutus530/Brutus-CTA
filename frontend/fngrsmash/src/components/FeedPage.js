@@ -1,12 +1,14 @@
 import React, {useState, useEffect} from 'react';
+import { apiURL } from '../util/apiURL'
 import axios from 'axios';
 
 const FeedPage = () => {
     const [tweets, setTweets] = useState([]);
+    const API = apiURL();
 
     const fetchData = async () => {
         try{
-            let res = await axios.get("http://localhost:3000/tweets")
+            let res = await axios.get(`${API}/tweets`)
             let data = res.data.body
             setTweets(data)
         } catch(error) {

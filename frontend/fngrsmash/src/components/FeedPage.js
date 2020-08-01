@@ -24,7 +24,10 @@ const FeedPage = () => {
         return <div>{tweet.tweet}</div>
     })  
 
-    return <div>{ loadTweets }</div>
+    return <div>
+    <h1>Feed</h1>
+    { loadTweets }
+    </div>
 }
 
 export default FeedPage;

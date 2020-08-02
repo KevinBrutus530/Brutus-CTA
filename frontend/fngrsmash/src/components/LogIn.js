@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { login } from '../util/firebaseFunctions';
 
 export default function LogIn() {
     const [ email, setEmail ] = useState("");
@@ -10,6 +11,7 @@ export default function LogIn() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            await login(email, password);
             history.push("/feed")
         } catch (err) {
             setError(err.message)

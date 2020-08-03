@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { apiURL } from '../util/apiURL'
 import axios from 'axios';
+import { logout } from '../util/firebaseFunctions';
 
 const FeedPage = () => {
     const [tweets, setTweets] = useState([]);
@@ -25,6 +26,7 @@ const FeedPage = () => {
     // })  
 
     return <div>
+    <button onClick={logout}>Log Out</button>
     <h1>Feed</h1>
     {/* { loadTweets } */}
     </div>

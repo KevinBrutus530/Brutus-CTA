@@ -4,10 +4,12 @@ import { Route, Switch } from 'react-router-dom';
 import FeedPage from './components/FeedPage';
 import UserProfile from './components/UserProfile';
 import LandingPage from './components/LandingPage';
+import AuthProvider from './providers/AuthContext';
 
 function App() {
   return (
     <div className="App">
+    <AuthProvider>
       <Switch>
         <Route exact path="/">
           <LandingPage />
@@ -19,6 +21,7 @@ function App() {
           <UserProfile />
         </Route>
       </Switch>
+    </AuthProvider>
     </div>
   );
 }

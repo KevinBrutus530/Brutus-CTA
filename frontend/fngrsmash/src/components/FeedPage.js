@@ -7,28 +7,28 @@ const FeedPage = () => {
     const [tweets, setTweets] = useState([]);
     const API = apiURL();
 
-    // const fetchData = async () => {
-    //     try{
-    //         let res = await axios.get(`${API}/tweets`)
-    //         let data = res.data.body
-    //         setTweets(data)
-    //     } catch(error) {
-    //         console.log(error)
-    //     }
-    // }
+    const fetchData = async () => {
+        try{
+            let res = await axios.get(`http://localhost:3001/tweets`)
+            let data = res.data.body
+            setTweets(data)
+        } catch(error) {
+            console.log(error)
+        }
+    }
 
-    // useEffect(() => {
-    //     fetchData()
-    // }, [])
+    useEffect(() => {
+        fetchData()
+    }, [])
     
-    // const loadTweets = tweets.map(tweet => {
-    //     return <div>{tweet.tweet}</div>
-    // })  
+    const loadTweets = tweets.map(tweet => {
+        return <div>{tweet.tweet}</div>
+    })  
 
     return <div>
     <button onClick={logout}>Log Out</button>
     <h1>Feed</h1>
-    {/* { loadTweets } */}
+    { loadTweets }
     </div>
 }
 

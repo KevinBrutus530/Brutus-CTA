@@ -3,7 +3,7 @@ import { Redirect, Route } from 'react-router-dom';
 import { AuthContext } from '../providers/AuthContext';
 
 export const AuthRoute = ({children, ...rest}) => {
-    const  currentUser  = useContext(AuthContext);
+    const  { currentUser }  = useContext(AuthContext);
     return (
         <Route
             {...rest}
@@ -15,7 +15,7 @@ export const AuthRoute = ({children, ...rest}) => {
 }
 
 export const ProtectedRoute = ({children, ...rest}) => {
-    const{ currentUser } = useContext(AuthContext);
+    const { currentUser } = useContext(AuthContext);
     return (
         <Route
             {...rest}

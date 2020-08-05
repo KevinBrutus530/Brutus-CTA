@@ -11,9 +11,9 @@ function App() {
     <div className="App">
     <AuthProvider>
       <Switch>
-        <Route exact path="/">
+        <AuthRoute exact path="/">
           <LandingPage />
-        </Route>
+        </AuthRoute>
         <Route path="/feed">
           <FeedPage />
         </Route>

@@ -21,14 +21,16 @@ const FeedPage = () => {
         fetchData()
     }, [])
     
-    const loadTweets = tweets.map(tweet => {
-        return <div>{tweet.tweet}</div>
+    const loadTweets = tweets.map((tweet, i) => {
+        return <li key={i} style={{'listStyle': 'none'}}>{tweet.tweet}</li>
     })  
 
     return <div>
     <button onClick={logout}>Log Out</button>
     <h1>Feed</h1>
+    <ul>
     { loadTweets }
+    </ul>
     </div>
 }
 

@@ -15,9 +15,7 @@ export default function SignUp() {
         e.preventDefault();
         try {
             let res = await signUp(email, password);
-            debugger
-            await axios.post(`http://localhost:3001/users`, {id: res.user.uid, email: email})
-            debugger
+            await axios.post(`${API}/users`, {id: res.user.uid, email: email})
             history.push("/feed")
         } catch (err) {
             setError(err.message)

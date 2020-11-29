@@ -13,7 +13,7 @@ const AuthProvider =({children}) => {
         if(user) {
             const { email, uid } = user;
             const lastLogin = user.metadata.lastLogin;
-            setCurrentUser({ email, lastLogin, id:uid });
+            setCurrentUser({ email, lastLogin, id: uid });
             getFirebaseIdToken().then(token => {
                 setToken(token);
                 setLoading(false);
@@ -25,14 +25,13 @@ const AuthProvider =({children}) => {
     }
 
     useEffect(() => {
-
         const unsubscribe = firebase.auth().onAuthStateChanged(updateUser)
         return unsubscribe;
     }, [])
 
     if(loading) return <div> Loading... </div>
     return (
-        <AuthContext.Provider value={ currentUser, token }>
+        <AuthContext.Provider value={{ currentUser, token }}>
             {children}
         </AuthContext.Provider>
     )

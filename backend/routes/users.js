@@ -1,11 +1,13 @@
-const users = require('express').Router();
+const users = require("express").Router();
 
 const {
   createUser,
-  fetchAllUsers
-} = require("../queries/usersQueries")
+  fetchAllUsers,
+  getSingleUserById,
+} = require("../queries/usersQueries");
 
-users.post("/", createUser)
-users.get("/", fetchAllUsers)
+users.post("/", createUser);
+users.get("/", fetchAllUsers);
+users.get("/:id", getSingleUserById);
 
 module.exports = users;

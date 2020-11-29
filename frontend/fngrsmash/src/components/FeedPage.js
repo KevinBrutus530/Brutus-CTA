@@ -9,7 +9,7 @@ const FeedPage = () => {
 
     const fetchData = async () => {
         try{
-            let res = await axios.get(`http://localhost:3001/tweets`)
+            let res = await axios.get(`${API}/tweets`)
             let data = res.data.body
             setTweets(data)
         } catch(error) {

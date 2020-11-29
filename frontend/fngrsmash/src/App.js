@@ -14,12 +14,12 @@ function App() {
         <AuthRoute exact path="/">
           <LandingPage />
         </AuthRoute>
-        <Route path="/feed">
+        <ProtectedRoute path="/feed">
           <FeedPage />
-        </Route>
-        <Route path="/profile">
+        </ProtectedRoute>
+        <ProtectedRoute path="/profile">
           <UserProfile />
-        </Route>
+        </ProtectedRoute>
       </Switch>
     </AuthProvider>
     </div>

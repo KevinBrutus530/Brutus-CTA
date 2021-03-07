@@ -20,7 +20,7 @@ export default function LogIn() {
 
     return (
         <div>
-            <h3>Log In Will Live Here</h3>
+            <h3>Log In</h3>
             {error ? <div>{error}</div> : null}
             <form onSubmit={handleSubmit}>
                 <input 

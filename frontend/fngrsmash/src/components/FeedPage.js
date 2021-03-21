@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { apiURL } from "../util/apiURL";
 import axios from "axios";
 import { logout } from "../util/firebaseFunctions";
-import TweetForm from "./TweetForm";
 
 const FeedPage = () => {
   const [tweets, setTweets] = useState([]);
@@ -23,6 +22,14 @@ const FeedPage = () => {
     fetchData();
   }, []);
 
+  const handleTweet = (e) =>{
+    setNewTweet(e.target.value)
+  }
+
+  const handleClick = async (e) => {
+    debugger
+  }
+
   const loadTweets = tweets.map((tweet, i) => {
     return (
       <li key={i} style={{ listStyle: "none" }}>
@@ -31,15 +38,16 @@ const FeedPage = () => {
     );
   });
 
-  // const loadTweetUser = tweetUser.map((user, i) => {
-  //     return <h4> {user.user}</h4>
-  // })
-
   return (
     <div>
       <button onClick={logout}>Log Out</button>
-      <TweetForm newTweet={newTweet} />
-      <h3>User Tweets</h3>
+      <div>
+      <form onSubmit={handleClick}>
+            <input placeholder="Something on your mind?" onChange={handleTweet}></input>
+            <button  id="submit" type="submit">Tweet</button>
+      </form>
+      </div>
+      <h3>Tweets</h3>
       <ul>{loadTweets}</ul>
     </div>
   );

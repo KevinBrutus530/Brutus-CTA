@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { AuthContext } from '../providers/AuthContext';
 import { apiURL } from "../util/apiURL";
-import axios from "axios";
 import { logout } from "../util/firebaseFunctions";
+import axios from "axios";
 
 const FeedPage = () => {
   const [tweets, setTweets] = useState([]);
-  const [newTweet, setNewTweet] = useState([]);
+  const [newTweet, setNewTweet] = useState("");
+  const [ error, setError ] = useState(null);
+  const { token, currentUser, loading } = useContext(AuthContext);
   const API = apiURL();
 
   const fetchData = async () => {
@@ -26,7 +29,21 @@ const FeedPage = () => {
     setNewTweet(e.target.value)
   }
 
-  const handleClick = async (e) => {
+  const handleTweetSubmit= async (e) => {
+    e.preventDefault();
+    const tweet = {
+      "user_tweet_id" : currentUser.id,
+      "tweet" : newTweet
+    }
+    if(newTweet.length < 280){
+      try{
+        await axios.post(`${API}/tweets/`, tweet)
+      } catch {
+        setError("Please use less than 280 characters")
+      }
+    } else {
+      debugger
+    }
     debugger
   }
 
@@ -42,7 +59,7 @@ const FeedPage = () => {
     <div>
       <button onClick={logout}>Log Out</button>
       <div>
-      <form onSubmit={handleClick}>
+      <form onSubmit={handleTweetSubmit}>
             <input placeholder="Something on your mind?" onChange={handleTweet}></input>
             <button  id="submit" type="submit">Tweet</button>
       </form>

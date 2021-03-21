@@ -54,7 +54,8 @@ const FeedPage = () => {
   const loadTweets = tweets.map((tweet, i) => {
     return (
       <li key={i} style={{ listStyle: "none" }}>
-        {tweet.tweet}
+        <h4>{tweet.username}</h4>
+        <p>{tweet.tweet}</p>
       </li>
     );
   });

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { apiURL } from '../util/apiURL';
@@ -7,6 +7,7 @@ import { signUp } from '../util/firebaseFunctions';
 export default function SignUp() {
     const [ email, setEmail ] = useState("");
     const [ password, setPassword ] = useState("");
+    const [ username, setUsername ] =  useState("")
     const [ error, setError ] = useState(null);
     const history = useHistory();
     const API = apiURL();
@@ -15,7 +16,7 @@ export default function SignUp() {
         e.preventDefault();
         try {
             let res = await signUp(email, password);
-            await axios.post(`${API}/users`, {id: res.user.uid, email: email})
+            await axios.post(`${API}/users`, {id: res.user.uid, email, username})
             history.push("/feed")
         } catch (err) {
             setError(err.message)
@@ -39,6 +40,12 @@ export default function SignUp() {
                 value={password}
                 onChange={(e) => setPassword(e.currentTarget.value)}
                 autoComplete="on"
+                />
+                <input 
+                type="text" 
+                placeholder="username"
+                value={username}
+                onChange={(e) => setUsername(e.currentTarget.value)}
                 />
                 <button type="submit">Create Account</button>
             </form>

@@ -9,7 +9,8 @@ DROP TABLE IF EXISTS tweets;
 CREATE TABLE users
 (
     id VARCHAR PRIMARY KEY,
-    email VARCHAR
+    email VARCHAR,
+    username VARCHAR UNIQUE
 );
 
 CREATE TABLE tweets
@@ -17,11 +18,14 @@ CREATE TABLE tweets
     id SERIAL PRIMARY KEY,
     user_tweet_id VARCHAR REFERENCES users(id) ON DELETE Set Null,
     tweet TEXT,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP
+    WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO users(id, email)
-VALUES('8wv','test8@test.com');
+    INSERT INTO users
+        (id, email, username)
+    VALUES('rgmRIgwVQcO3zljfzqqyGUkXgjm2', 'kevinbrutus@pursuit.org', 'BrutusTheFirst');
 
-INSERT INTO tweets(id, user_tweet_id, tweet)
-VALUES(1, '8wv', 'my first tweet')
+    INSERT INTO tweets
+        (user_tweet_id, tweet)
+    VALUES('rgmRIgwVQcO3zljfzqqyGUkXgjm2', 'my first tweet')

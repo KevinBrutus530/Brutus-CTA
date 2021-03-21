@@ -2,7 +2,7 @@ const db = require("../db/index");
 
 const getAllTweets = async (req, res, next) => {
   try {
-    let tweets = await db.any("SELECT * FROM tweets ORDER BY id DESC");
+    let tweets = await db.any("SELECT tweets.id, tweets.user_tweet_id, tweets.tweet, tweets.created_at, users.username FROM tweets JOIN users ON tweets.user_tweet_id = users.id ORDER BY created_at DESC");
     res.status(200).json({
       status: "Success",
       message: "got all tweets",

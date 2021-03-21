@@ -3,7 +3,7 @@ const db = require("../db/index.js");
 const createUser = async (req, res, next) => {
   try {
     await db.none(
-      "INSERT INTO users(id, email) VALUES (${id}, ${email})",
+      "INSERT INTO users(id, email, username) VALUES (${id}, ${email}, ${username})",
       req.body
     );
     res.json({

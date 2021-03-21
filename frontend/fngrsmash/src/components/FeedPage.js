@@ -7,8 +7,10 @@ import axios from "axios";
 const FeedPage = () => {
   const [tweets, setTweets] = useState([]);
   const [newTweet, setNewTweet] = useState("");
-  const [ error, setError ] = useState(null);
-  const { token, currentUser, loading } = useContext(AuthContext);
+  const [error, setError] = useState(null);
+
+  const { currentUser } = useContext(AuthContext);
+
   const API = apiURL();
 
   const fetchData = async () => {
@@ -25,8 +27,14 @@ const FeedPage = () => {
     fetchData();
   }, []);
 
+
+  // limit tweet to 280char 
   const handleTweet = (e) =>{
-    setNewTweet(e.target.value)
+    if(e.target.value.length <= 280){
+      setNewTweet(e.target.value)
+      } else {
+      window.alert("tweet too long")
+    }
   }
 
   const handleTweetSubmit= async (e) => {
@@ -39,7 +47,7 @@ const FeedPage = () => {
         await axios.post(`${API}/tweets/`, tweet)
         fetchData();
       } catch {
-        setError("Please use less than 280 characters")
+        setError(error)
       }
   }
 
@@ -58,7 +66,9 @@ const FeedPage = () => {
       <form onSubmit={handleTweetSubmit}>
             <input placeholder="Something on your mind?" onChange={handleTweet}></input>
             <button  id="submit" type="submit">Tweet</button>
+            <p>{newTweet.length > 260 ? newTweet.length : null}</p>
       </form>
+
       </div>
       <h3>Tweets</h3>
       <ul>{loadTweets}</ul>

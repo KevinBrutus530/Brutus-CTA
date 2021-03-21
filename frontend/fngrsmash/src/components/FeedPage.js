@@ -35,16 +35,12 @@ const FeedPage = () => {
       "user_tweet_id" : currentUser.id,
       "tweet" : newTweet
     }
-    if(newTweet.length < 280){
       try{
         await axios.post(`${API}/tweets/`, tweet)
+        fetchData();
       } catch {
         setError("Please use less than 280 characters")
       }
-    } else {
-      debugger
-    }
-    debugger
   }
 
   const loadTweets = tweets.map((tweet, i) => {

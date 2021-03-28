@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useHistory } from 'react-router-dom';
-import { AuthContext } from '../providers/AuthContext';
+import { useHistory } from "react-router-dom";
+import { AuthContext } from "../providers/AuthContext";
 import { apiURL } from "../util/apiURL";
 import { logout } from "../util/firebaseFunctions";
 import axios from "axios";
@@ -29,29 +29,28 @@ const FeedPage = () => {
     fetchData();
   }, []);
 
-
-  // limit tweet to 280char 
-  const handleTweet = (e) =>{
-    if(e.target.value.length <= 280){
-      setNewTweet(e.target.value)
-      } else {
-      window.alert("tweet too long")
+  // limit tweet to 280char
+  const handleTweet = (e) => {
+    if (e.target.value.length <= 280) {
+      setNewTweet(e.target.value);
+    } else {
+      window.alert("tweet too long");
     }
-  }
+  };
 
-  const handleTweetSubmit= async (e) => {
+  const handleTweetSubmit = async (e) => {
     e.preventDefault();
     const tweet = {
-      "user_tweet_id" : currentUser.id,
-      "tweet" : newTweet
+      user_tweet_id: currentUser.id,
+      tweet: newTweet,
+    };
+    try {
+      await axios.post(`${API}/tweets/`, tweet);
+      fetchData();
+    } catch {
+      setError(error);
     }
-      try{
-        await axios.post(`${API}/tweets/`, tweet)
-        fetchData();
-      } catch {
-        setError(error)
-      }
-  }
+  };
 
   const loadTweets = tweets.map((tweet, i) => {
     return (
@@ -67,14 +66,17 @@ const FeedPage = () => {
       <button onClick={logout}>Log Out</button>
       <button onClick={() => history.push(`/profile`)}>profile</button>
       <div>
-      <form onSubmit={handleTweetSubmit}>
-            <input placeholder="Something on your mind?" onChange={handleTweet}></input>
-            <button  id="submit" type="submit">Tweet</button>
-            <p>{newTweet.length > 260 ? newTweet.length : null}</p>
-      </form>
-
+        <form onSubmit={handleTweetSubmit}>
+          <input
+            placeholder="Something on your mind?"
+            onChange={handleTweet}
+          ></input>
+          <button id="submit" type="submit">
+            Tweet
+          </button>
+          <p>{newTweet.length > 260 ? newTweet.length : null}</p>
+        </form>
       </div>
-      <h3>Tweets</h3>
       <ul>{loadTweets}</ul>
     </div>
   );

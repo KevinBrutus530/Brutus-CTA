@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../providers/AuthContext';
 import { apiURL } from "../util/apiURL";
 import { logout } from "../util/firebaseFunctions";
@@ -9,6 +10,7 @@ const FeedPage = () => {
   const [newTweet, setNewTweet] = useState("");
   const [error, setError] = useState(null);
 
+  let history = useHistory();
   const { currentUser } = useContext(AuthContext);
 
   const API = apiURL();
@@ -63,6 +65,7 @@ const FeedPage = () => {
   return (
     <div>
       <button onClick={logout}>Log Out</button>
+      <button onClick={() => history.push(`/profile`)}>profile</button>
       <div>
       <form onSubmit={handleTweetSubmit}>
             <input placeholder="Something on your mind?" onChange={handleTweet}></input>

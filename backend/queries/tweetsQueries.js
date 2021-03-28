@@ -12,11 +12,11 @@ const getAllTweets = async (req, res, next) => {
     console.log(error);
   }
 };
-const getTweetByUser = async (req, res, next) => {
+const getTweetsByUser = async (req, res, next) => {
   try {
     let tweets = await db.any(
-      "SELECT *  FROM tweets WHERE user_post_id = $1",
-      req.params.id
+      "SELECT tweets.id, tweets.user_tweet_id, tweets.tweet, tweets.created_at, users.username FROM tweets JOIN users ON tweets.user_tweet_id = users.id WHERE users.username =$1 ORDER BY created_at DESC",
+      req.params.username
     );
     res.status(200).json({
       status: "Success",
@@ -70,4 +70,4 @@ const getSingleTweet = async (req, res, next) => {
   }
 };
 
-module.exports = { getAllTweets, getTweetByUser, createTweet, getSingleTweet };
+module.exports = { getAllTweets, getTweetsByUser, createTweet, getSingleTweet };

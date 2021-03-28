@@ -1,10 +1,10 @@
 const tweets = require("express").Router()
 
-const { getAllTweets, getTweetByUser, createTweet, getSingleTweet } = require("../queries/tweetsQueries");
+const { getAllTweets, getTweetsByUser, createTweet, getSingleTweet } = require("../queries/tweetsQueries");
 
 tweets.get("/", getAllTweets);
 
-tweets.get("/:id", getTweetByUser);
+tweets.get("/:username", getTweetsByUser);
 
 tweets.get("/tweet/:id", getSingleTweet)
 

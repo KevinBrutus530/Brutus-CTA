@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { AuthContext } from "../providers/AuthContext";
 import { apiURL } from "../util/apiURL";
 import { logout } from "../util/firebaseFunctions";
@@ -55,16 +55,20 @@ const FeedPage = () => {
   const loadTweets = tweets.map((tweet, i) => {
     return (
       <li key={i} style={{ listStyle: "none" }}>
-        <h4>{tweet.username}</h4>
+        <img src={tweet.picture} />
+        <Link to={`/${tweet.username}`}>
+          <h4>{tweet.username}</h4>
+        </Link>
         <p>{tweet.tweet}</p>
       </li>
     );
   });
-
   return (
     <div>
       <button onClick={logout}>Log Out</button>
-      <button onClick={() => history.push(`/profile`)}>profile</button>
+      <button onClick={() => history.push(`/${currentUser.username}`)}>
+        {currentUser.username}
+      </button>
       <div>
         <form onSubmit={handleTweetSubmit}>
           <input

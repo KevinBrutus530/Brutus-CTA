@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { AuthContext } from "../providers/AuthContext";
 import { apiURL } from "../util/apiURL";
 import { logout } from "../util/firebaseFunctions";
@@ -10,10 +10,11 @@ const UserProfile = () => {
   let history = useHistory();
   const { currentUser } = useContext(AuthContext);
   const API = apiURL();
+  const params = useParams();
 
   const fetchData = async () => {
     try {
-      let res = await axios.get(`${API}/tweets/${"BrutusTheFirst"}`);
+      let res = await axios.get(`${API}/tweets/${params.username}`);
       let data = res.data.body;
       setUserTweets(data);
     } catch (error) {
@@ -28,6 +29,7 @@ const UserProfile = () => {
   const loadUserTweets = userTweets.map((tweet, i) => {
     return (
       <li key={i} style={{ listStyle: "none" }}>
+        <img src={tweet.picture} />
         <h4>{tweet.username}</h4>
         <p>{tweet.tweet}</p>
       </li>

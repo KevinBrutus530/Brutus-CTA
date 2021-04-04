@@ -46,6 +46,29 @@ const getSingleUserById = async (req, res, next) => {
   }
 };
 
+// const editUser = async (req, res, next) => {
+//   try {
+//     let { user_id, user_username } = req.body;
+//     let { uid } = req.params;
+//     let owner = await db.one(
+//       'UPDATE owners SET owner_id=$1, owner_name=$2 WHERE user_id=$3 RETURNING *',
+//       [owner_id, owner_name, uid]
+//     );
+//     res.status(200).json({
+//       status: 'success',
+//       message: 'updated owner',
+//       payload: owner,
+//     });
+//   } catch (err) {
+//     res.status(400).json({
+//       status: 'Error',
+//       message: 'Error edit Owner',
+//       payload: err,
+//     });
+//     next();
+//   }
+// };
+
 module.exports = {
   createUser,
   fetchAllUsers,

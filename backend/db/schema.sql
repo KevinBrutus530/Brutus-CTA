@@ -10,7 +10,8 @@ CREATE TABLE users
 (
     id VARCHAR PRIMARY KEY,
     email VARCHAR,
-    username VARCHAR UNIQUE
+    username VARCHAR UNIQUE,
+    picture varchar DEFAULT 'https://pbs.twimg.com/media/EEU0IauVAAE88xo.png'
 );
 
 CREATE TABLE tweets

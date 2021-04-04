@@ -2,7 +2,9 @@ const db = require("../db/index");
 
 const getAllTweets = async (req, res, next) => {
   try {
-    let tweets = await db.any("SELECT tweets.id, tweets.user_tweet_id, tweets.tweet, tweets.created_at, users.username FROM tweets JOIN users ON tweets.user_tweet_id = users.id ORDER BY created_at DESC");
+    let tweets = await db.any(
+      "SELECT tweets.id, tweets.user_tweet_id, tweets.tweet, tweets.created_at, users.username, users.picture FROM tweets JOIN users ON tweets.user_tweet_id = users.id ORDER BY created_at DESC"
+    );
     res.status(200).json({
       status: "Success",
       message: "got all tweets",
@@ -15,7 +17,7 @@ const getAllTweets = async (req, res, next) => {
 const getTweetsByUser = async (req, res, next) => {
   try {
     let tweets = await db.any(
-      "SELECT tweets.id, tweets.user_tweet_id, tweets.tweet, tweets.created_at, users.username FROM tweets JOIN users ON tweets.user_tweet_id = users.id WHERE users.username =$1 ORDER BY created_at DESC",
+      "SELECT tweets.id, tweets.user_tweet_id, tweets.tweet, tweets.created_at, users.username, users.picture FROM tweets JOIN users ON tweets.user_tweet_id = users.id WHERE users.username =$1 ORDER BY created_at DESC",
       req.params.username
     );
     res.status(200).json({

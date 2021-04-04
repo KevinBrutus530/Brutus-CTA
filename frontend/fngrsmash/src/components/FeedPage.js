@@ -3,6 +3,7 @@ import { useHistory, Link } from "react-router-dom";
 import { AuthContext } from "../providers/AuthContext";
 import { apiURL } from "../util/apiURL";
 import { logout } from "../util/firebaseFunctions";
+import "../css/tweets.css";
 import axios from "axios";
 
 const FeedPage = () => {
@@ -54,12 +55,16 @@ const FeedPage = () => {
 
   const loadTweets = tweets.map((tweet, i) => {
     return (
-      <li key={i} style={{ listStyle: "none" }}>
-        <img src={tweet.picture} />
-        <Link to={`/${tweet.username}`}>
-          <h4>{tweet.username}</h4>
-        </Link>
-        <p>{tweet.tweet}</p>
+      <li className="tweetCard" key={i} style={{ listStyle: "none" }}>
+        <div>
+          <img className="tweetpfp" src={tweet.picture} />
+        </div>
+        <div className="tweetInfo">
+          <Link to={`/${tweet.username}`}>
+            <h4>{tweet.username}</h4>
+          </Link>
+          <p>{tweet.tweet}</p>
+        </div>
       </li>
     );
   });
